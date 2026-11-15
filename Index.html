@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MarkList</title>
+<style>
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;background:#f4f5f3;color:#1b3a2e;text-align:center;padding:24px}
+button{margin-top:16px;padding:12px 22px;font-size:16px;border:0;border-radius:10px;background:#1b6b4f;color:#fff}
+</style>
+</head>
+<body>
+<div id="b"><h1>MarkList</h1><p>Opening the school marks page...</p></div>
+<script>
+function offline(){
+  document.getElementById('b').innerHTML='<h1>MarkList</h1><p>The marks page is not available now.</p><p>Ask the admin to start it, then try again.</p><button onclick="location.reload()">Try again</button>';
+}
+fetch('link.txt?t='+Date.now(),{cache:'no-store'})
+  .then(function(r){if(!r.ok)throw 0;return r.text();})
+  .then(function(t){
+    t=t.trim();
+    if(!/^https:\/\/[a-z0-9-]+\.trycloudflare\.com\/?$/.test(t))throw 0;
+    location.replace(t);
+  })
+  .catch(offline);
+</script>
+</body>
+</html>
